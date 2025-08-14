@@ -4,7 +4,8 @@ trigger:
         - main
 
 pool:
- name:Practice    
+ name:
+   Practice
 
 steps:
 - task: TerraformInstaller@1

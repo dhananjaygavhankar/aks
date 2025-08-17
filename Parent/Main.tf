@@ -1,7 +1,7 @@
 # Resource Group Creation module 
 
 module "rg" {
-  source = "../Child/rf"
+  source      = "../Child/rf"
   name_rg     = var.name_rg
   rg_location = var.rg_location
 }
@@ -19,7 +19,6 @@ module "aks" {
   vm2take      = var.vm2take
   o_version    = var.o_version
 }
-
 
 # Vnet and Subnet creation 
 module "vnet" {

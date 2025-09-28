@@ -29,3 +29,6 @@ data "azurerm_client_config" "current" {}
 output "Output_subscription_id" {
   value = data.azurerm_client_config.current.subscription_id
 }
+
+
+# $env:ARM_SUBSCRIPTION_ID = (az account show --query id -o tsv)

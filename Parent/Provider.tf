@@ -13,7 +13,7 @@ terraform {
     resource_group_name  = "DoNotDeleteRg"
     storage_account_name = "donotdeletestorage5555"
     container_name       = "tfstate"
-    key                  = "aks_terraform.tfstate"
+    key                  = "Gaks_terraform.tfstate"
   }
 }
 

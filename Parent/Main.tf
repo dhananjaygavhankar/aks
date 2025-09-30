@@ -20,6 +20,14 @@ module "aks" {
   o_version    = var.o_version
 }
 
+module "acr" {
+  source      = "../Child/Acr"
+  depends_on  = [module.rg, module.aks]
+  name_rg     = var.name_rg
+  rg_location = var.rg_location
+}
+
+
 # Vnet and Subnet creation 
 module "vnet" {
   source      = "../Child/vlan"

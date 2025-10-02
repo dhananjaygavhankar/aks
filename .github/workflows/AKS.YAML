@@ -3,9 +3,7 @@ name: AKS_Cluster_creation
 on:
   push:
     branches:
-     - Main 
-
-  workflow_dispatch:
+     - main 
 
 # The permissions key grants the GITHUB_TOKEN read and write access
 # to the repository's contents.

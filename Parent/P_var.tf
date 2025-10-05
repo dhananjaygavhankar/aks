@@ -4,7 +4,7 @@ variable "name_rg" {}
 variable "rg_location" {}
 # variable "subnet_id"{}
 variable "vm2take" {}
-variable "o_version" {}
+# variable "o_version" {}
 
 variable "cluster_name" {
   description = "Name of the AKS cluster"

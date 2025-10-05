@@ -8,7 +8,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     name       = "default"
     node_count = 1
     vm_size = var.vm2take
-    orchestrator_version = var.o_version
+    # orchestrator_version = var.o_version
   }
 
   network_profile {

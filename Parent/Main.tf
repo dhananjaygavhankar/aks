@@ -17,7 +17,7 @@ module "aks" {
   subnet_name  = var.subnet_name
   aks_vnet     = var.aks_vnet
   vm2take      = var.vm2take
-  o_version    = var.o_version
+  # o_version    = var.o_version
 }
 
 module "acr" {

@@ -6,4 +6,4 @@ variable "dns_prefix" {}
 variable "subnet_name" {}
 variable "aks_vnet" {}
 variable "vm2take" {}
-variable "o_version" {}
+# variable "o_version" {}

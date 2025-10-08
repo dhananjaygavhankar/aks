@@ -1,12 +1,12 @@
 # Resource Group Variables
-name_rg     = "aks_rg"
-rg_location = "centralindia"
+name_rg     = "aks_r"
+rg_location = "westeurope" #"centralindia"
 
 
 # AKS Cluster Variables
 cluster_name = "g15-aks-cluster"
 dns_prefix   = "g15akscluster"
-vm2take      = "standard_a2_v2"
+vm2take      = "standard_F2" #"standard_a2_v2"
 # o_version    = "1.32.7"
 # min_count    = 1
 # max_count    = 2

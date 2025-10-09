@@ -14,5 +14,5 @@ vm2take      = "standard_F2" #"standard_a2_v2"
 # node_count   = 2
 
 # vnet details
-aks_vnet    = "aks_vnet4subnet"
-subnet_name = "aks_subnet1"
+# aks_vnet = "aks_vnet4subnet"
+# subnet_name = "aks_subnet1"

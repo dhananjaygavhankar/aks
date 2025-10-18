@@ -9,8 +9,6 @@ dns_prefix   = "g15akscluster"
 vm2take      = "standard_F2" #"standard_a2_v2"
 # o_version    = "1.32.7"
 # min_count    = 1
-# max_count    = 2
-# max_pods     = 50
 # node_count   = 2
 
 # vnet details

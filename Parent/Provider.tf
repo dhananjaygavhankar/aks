@@ -11,7 +11,7 @@ terraform {
   }
   backend "azurerm" {
     resource_group_name  = "DoNotDeleteRg"
-    storage_account_name = "donotdeletestorage555"
+    storage_account_name = "donotdeletestorage55"
     container_name       = "tfstate"
     key                  = "aks_terraform.tfstate"
   }

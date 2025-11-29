@@ -1,6 +1,6 @@
 # Resource Group Variables
 name_rg     = "aks_r"
-rg_location = "centralindia" # "westeurope"
+rg_location = "southindia" # "westeurope"
 
 
 # AKS Cluster Variables

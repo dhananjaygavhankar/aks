@@ -6,12 +6,13 @@ terraform {
   required_providers {
     azurerm = {
       source = "hashicorp/azurerm"
+      # version = "4.55.0"
 
     }
   }
   backend "azurerm" {
     resource_group_name  = "DoNotDeleteRg"
-    storage_account_name = "donotdeletestorage55"
+    storage_account_name = "donotdeletestorage5"
     container_name       = "tfstate"
     key                  = "aks_terraform.tfstate"
   }

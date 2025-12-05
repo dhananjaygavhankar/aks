@@ -27,12 +27,12 @@ module "acr" {
   rg_location = var.rg_location
 }
 
-output "aks_child-id"{
+output "aks_child-id" {
   value = module.aks.Aks_id
 }
 
 resource "azurerm_role_assignment" "acr_pull" {
-  depends_on = [module.acr, module.aks]
+  depends_on           = [module.acr, module.aks]
   scope                = module.acr.acr_id
   role_definition_name = "AcrPull"
   principal_id         = module.aks.Aks_id

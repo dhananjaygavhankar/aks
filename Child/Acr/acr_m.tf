@@ -1,5 +1,5 @@
 resource "azurerm_container_registry" "main" {
-  name                = "dhandhandhana15"
+  name                = "dhandhandhana1215"
   resource_group_name = var.name_rg
   location            = var.rg_location
   sku                 = "Premium"

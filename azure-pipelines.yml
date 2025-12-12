@@ -19,7 +19,7 @@ stages:
             inputs:
               provider: 'azurerm'
               command: 'init'
-              workingDirectory: '$(System.DefaultWorkingDirectory)aks /Parent/'
+              workingDirectory: '$(System.DefaultWorkingDirectory)/aks/Parent/'
               backendServiceArm: 'class_pipleline'
               backendAzureRmOverrideSubscriptionID: 'ff1980ab-1170-4014-971d-df65aabf1e5b'
               backendAzureRmResourceGroupName: 'DoNotDeleteRg'

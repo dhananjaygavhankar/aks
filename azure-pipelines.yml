@@ -5,7 +5,7 @@ trigger:
 
 pool:
  name: Default
- demands: Pradip_learning
+ demands: "Pradip_learning"
 
 stages:
   -  stage: 

@@ -41,5 +41,38 @@ stages:
               environmentServiceNameAzureRM: 'class_pipleline'
               environmentAzureRmOverrideSubscriptionID: 'ff1980ab-1170-4014-971d-df65aabf1e5b'
               environmentAzureRmUseIdTokenGeneration: true
-          
+       -  job:
+          displayName: Terraform 2nd job
+          pool:
+           name: Default
+           demands:
+             - Agent.Name -equals docker_agent
+          steps:
+          - task: TerraformInstaller@1
+            inputs:
+              terraformVersion: 'latest'
+          - task: TerraformTask@5
+            inputs:
+              provider: 'azurerm'
+              command: 'init'
+              workingDirectory: '$(System.DefaultWorkingDirectory)/Parent/'
+              backendServiceArm: 'class_pipleline'
+              backendAzureRmOverrideSubscriptionID: 'ff1980ab-1170-4014-971d-df65aabf1e5b'
+              backendAzureRmResourceGroupName: 'DoNotDeleteRg'
+              backendAzureRmStorageAccountName: 'donotdeletestorage5'
+              backendAzureRmContainerName: 'tfstate'
+              backendAzureRmKey: 'aks_terraform.tfstate'
+
+          - task: TerraformTask@5
+            inputs:
+              provider: 'azurerm'
+              command: 'validate'
+          - task: TerraformTask@5
+            inputs:
+              provider: 'azurerm'
+              command: 'plan'
+              workingDirectory: '$(System.DefaultWorkingDirectory)/Parent/'
+              environmentServiceNameAzureRM: 'class_pipleline'
+              environmentAzureRmOverrideSubscriptionID: 'ff1980ab-1170-4014-971d-df65aabf1e5b'
+              environmentAzureRmUseIdTokenGeneration: true   
       

@@ -3,8 +3,8 @@ trigger:
     include:
       - None
 
-pool:
- name: Pradip_learning
+# pool:
+#  name: Pradip_learning
 #  demands:
 #   - Agent.Name -equals Pradip_learning
 
@@ -13,6 +13,8 @@ stages:
      jobs:
        -  job:
           displayName: Terraform install
+          pool:
+            name: Pradip_learning
           steps:
           - task: TerraformInstaller@1
             inputs:

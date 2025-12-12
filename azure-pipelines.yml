@@ -24,6 +24,7 @@ stages:
             inputs:
               provider: 'azurerm'
               command: 'plan'
+              workingDirectory: '$(System.DefaultWorkingDirectory)/aks/Parent/'
               environmentServiceNameAzureRM: 'class_pipleline'
               environmentAzureRmOverrideSubscriptionID: 'ff1980ab-1170-4014-971d-df65aabf1e5b'
               environmentAzureRmUseIdTokenGeneration: true

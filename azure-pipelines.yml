@@ -41,6 +41,8 @@ stages:
               environmentServiceNameAzureRM: 'class_pipleline'
               environmentAzureRmOverrideSubscriptionID: 'ff1980ab-1170-4014-971d-df65aabf1e5b'
               environmentAzureRmUseIdTokenGeneration: true
+  -  stage: 
+     jobs:
        -  job:
           displayName: Terraform 2nd job
           pool:

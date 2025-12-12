@@ -4,9 +4,9 @@ trigger:
       - None
 
 pool:
- name: Default
- demands:
-  - Agent.Name -equals Pradip_learning
+ name: Pradip_learning
+#  demands:
+#   - Agent.Name -equals Pradip_learning
 
 stages:
   -  stage: 

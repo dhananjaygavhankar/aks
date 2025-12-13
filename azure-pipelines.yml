@@ -62,10 +62,10 @@ stages:
           # - task: SonarQubePublish@8
           #   inputs:
           #     pollingTimeoutSec: '300'
-  -  stage: 
-     dependsOn: []
-     condition: always()
-     jobs:
+  # -  stage: 
+  #    dependsOn: []
+  #    condition: always()
+  #    jobs:
        -  job:
           displayName: Terraform 2nd job
           pool:

@@ -26,6 +26,7 @@ stages:
           #     cliProjectName: 'AKS Terraform'
           #     cliSources: '$(System.DefaultWorkingDirectory)/Parent/'
           - task: CmdLine@2
+            displayName: SonarQube scanning
             inputs:
               script: 'sonar-scanner -Dsonar.projectKey=aks-repo -Dsonar.sources=. -Dsonar.host.url=http://localhost:9000 -Dsonar.token=sqp_ca05323fe18131c87f9d3206d316a351ed85bc11'
           - task: TerraformInstaller@1

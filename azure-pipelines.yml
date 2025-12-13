@@ -1,29 +1,63 @@
+# trigger:
+#  branches:
+#     include:
+#       - Main
+
+# jobs:
+#   - job: 
+#     displayName: Terraform install
+#     pool:
+#       name: Pradip_learning
+#     steps:
+#       - task: CmdLine@2
+#         displayName: SonarQube scanning
+#         inputs:
+#           script: 'sonar-scanner -Dsonar.projectKey=aks-repo -Dsonar.sources=. -Dsonar.host.url=http://localhost:9000 -Dsonar.token=sqp_ca05323fe18131c87f9d3206d316a351ed85bc11'
+
+#   -  job:
+#      displayName: Terraform 2nd job
+#      pool:
+#        name: Default
+#        demands:
+#          - Agent.Name -equals docker_agent
+#      steps:
+#      - task: TerraformInstaller@1
+#        inputs:
+#          terraformVersion: 'latest'
+
 trigger:
- branches:
+  branches:
     include:
       - Main
 
 jobs:
-  - job: 
-    displayName: Terraform install
+  # ✅ Job 1: SonarQube (Pradip_learning) - Runs IMMEDIATELY
+  - job: SonarQubeJob
+    displayName: 'SonarQube Scan'
     pool:
       name: Pradip_learning
     steps:
       - task: CmdLine@2
-        displayName: SonarQube scanning
+        displayName: 'SonarQube scanning'
         inputs:
-          script: 'sonar-scanner -Dsonar.projectKey=aks-repo -Dsonar.sources=. -Dsonar.host.url=http://localhost:9000 -Dsonar.token=sqp_ca05323fe18131c87f9d3206d316a351ed85bc11'
+          script: |
+            sonar-scanner ^
+              -Dsonar.projectKey=aks-repo ^
+              -Dsonar.sources=. ^
+              -Dsonar.host.url=http://localhost:9000 ^
+              -Dsonar.token=$(SONAR_TOKEN)  # Secure token
 
-  -  job:
-     displayName: Terraform 2nd job
-     pool:
-       name: Default
-       demands:
-         - Agent.Name -equals docker_agent
-     steps:
-     - task: TerraformInstaller@1
-       inputs:
-         terraformVersion: 'latest'
+  # ✅ Job 2: Terraform (docker_agent) - Runs PARALLEL
+  - job: DockerTerraformJob
+    displayName: 'Terraform 2nd job'
+    pool:
+      name: Default
+      demands:
+        - Agent.Name -equals docker_agent
+    steps:
+      - task: TerraformInstaller@1
+        inputs:
+          terraformVersion: 'latest'
 
 
 

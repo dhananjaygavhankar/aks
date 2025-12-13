@@ -3,101 +3,125 @@ trigger:
     include:
       - Main
 
+jobs:
+  - job: 
+    displayName: Terraform install
+    pool:
+      name: Pradip_learning
+    steps:
+      - task: CmdLine@2
+        displayName: SonarQube scanning
+        inputs:
+          script: 'sonar-scanner -Dsonar.projectKey=aks-repo -Dsonar.sources=. -Dsonar.host.url=http://localhost:9000 -Dsonar.token=sqp_ca05323fe18131c87f9d3206d316a351ed85bc11'
+
+  -  job:
+     displayName: Terraform 2nd job
+     pool:
+       name: Default
+       demands:
+         - Agent.Name -equals docker_agent
+     steps:
+     - task: TerraformInstaller@1
+       inputs:
+         terraformVersion: 'latest'
+
+
+
+
 # pool:
 #  name: Pradip_learning
 #  demands:
 #   - Agent.Name -equals Pradip_learning
 
-stages:
-  -  stage: 
-     jobs:
-       -  job:
-          displayName: Terraform install
-          pool:
-            name: Pradip_learning
-          steps:
-          # - task: SonarQubePrepare@8
-          #   displayName: Sonarqube
-          #   inputs:
-          #     SonarQube: 'sonar'
-          #     scannerMode: 'cli'
-          #     configMode: 'manual'
-          #     cliProjectKey: 'aks'
-          #     cliProjectName: 'AKS Terraform'
-          #     cliSources: '$(System.DefaultWorkingDirectory)/Parent/'
-          - task: CmdLine@2
-            displayName: SonarQube scanning
-            inputs:
-              script: 'sonar-scanner -Dsonar.projectKey=aks-repo -Dsonar.sources=. -Dsonar.host.url=http://localhost:9000 -Dsonar.token=sqp_ca05323fe18131c87f9d3206d316a351ed85bc11'
-          - task: TerraformInstaller@1
-            inputs:
-              terraformVersion: 'latest'
-          - task: TerraformTask@5
-            inputs:
-              provider: 'azurerm'
-              command: 'init'
-              workingDirectory: '$(System.DefaultWorkingDirectory)/Parent/'
-              backendServiceArm: 'class_pipleline'
-              backendAzureRmOverrideSubscriptionID: 'ff1980ab-1170-4014-971d-df65aabf1e5b'
-              backendAzureRmResourceGroupName: 'DoNotDeleteRg'
-              backendAzureRmStorageAccountName: 'donotdeletestorage5'
-              backendAzureRmContainerName: 'tfstate'
-              backendAzureRmKey: 'aks_terraform.tfstate'
+# stages:
+#   -  stage: 
+#      jobs:
+#        -  job:
+#           displayName: Terraform install
+#           pool:
+#             name: Pradip_learning
+#           steps:
+#           # - task: SonarQubePrepare@8
+#           #   displayName: Sonarqube
+#           #   inputs:
+#           #     SonarQube: 'sonar'
+#           #     scannerMode: 'cli'
+#           #     configMode: 'manual'
+#           #     cliProjectKey: 'aks'
+#           #     cliProjectName: 'AKS Terraform'
+#           #     cliSources: '$(System.DefaultWorkingDirectory)/Parent/'
+#           - task: CmdLine@2
+#             displayName: SonarQube scanning
+#             inputs:
+#               script: 'sonar-scanner -Dsonar.projectKey=aks-repo -Dsonar.sources=. -Dsonar.host.url=http://localhost:9000 -Dsonar.token=sqp_ca05323fe18131c87f9d3206d316a351ed85bc11'
+#           - task: TerraformInstaller@1
+#             inputs:
+#               terraformVersion: 'latest'
+#           - task: TerraformTask@5
+#             inputs:
+#               provider: 'azurerm'
+#               command: 'init'
+#               workingDirectory: '$(System.DefaultWorkingDirectory)/Parent/'
+#               backendServiceArm: 'class_pipleline'
+#               backendAzureRmOverrideSubscriptionID: 'ff1980ab-1170-4014-971d-df65aabf1e5b'
+#               backendAzureRmResourceGroupName: 'DoNotDeleteRg'
+#               backendAzureRmStorageAccountName: 'donotdeletestorage5'
+#               backendAzureRmContainerName: 'tfstate'
+#               backendAzureRmKey: 'aks_terraform.tfstate'
+#           - task: TerraformTask@5
+#             inputs:
+#               provider: 'azurerm'
+#               command: 'validate'
+#           - task: TerraformTask@5
+#             inputs:
+#               provider: 'azurerm'
+#               command: 'plan'
+#               workingDirectory: '$(System.DefaultWorkingDirectory)/Parent/'
+#               environmentServiceNameAzureRM: 'class_pipleline'
+#               environmentAzureRmOverrideSubscriptionID: 'ff1980ab-1170-4014-971d-df65aabf1e5b'
+#               environmentAzureRmUseIdTokenGeneration: true
+#           # - task: SonarQubeAnalyze@8
+#           #   inputs:
+#           #     jdkversion: 'JAVA_HOME'
+#           # - task: SonarQubePublish@8
+#           #   inputs:
+#           #     pollingTimeoutSec: '300'
+#   # -  stage: 
+#   #    dependsOn: []
+#   #    condition: always()
+#   #    jobs:
+#        -  job:
+#           displayName: Terraform 2nd job
+#           pool:
+#            name: Default
+#            demands:
+#              - Agent.Name -equals docker_agent
+#           steps:
+#           - task: TerraformInstaller@1
+#             inputs:
+#               terraformVersion: 'latest'
+#           - task: TerraformTask@5
+#             inputs:
+#               provider: 'azurerm'
+#               command: 'init'
+#               workingDirectory: '$(System.DefaultWorkingDirectory)/Parent/'
+#               backendServiceArm: 'class_pipleline'
+#               backendAzureRmOverrideSubscriptionID: 'ff1980ab-1170-4014-971d-df65aabf1e5b'
+#               backendAzureRmResourceGroupName: 'DoNotDeleteRg'
+#               backendAzureRmStorageAccountName: 'donotdeletestorage5'
+#               backendAzureRmContainerName: 'tfstate'
+#               backendAzureRmKey: 'aks_terraform.tfstate'
 
-          - task: TerraformTask@5
-            inputs:
-              provider: 'azurerm'
-              command: 'validate'
-          - task: TerraformTask@5
-            inputs:
-              provider: 'azurerm'
-              command: 'plan'
-              workingDirectory: '$(System.DefaultWorkingDirectory)/Parent/'
-              environmentServiceNameAzureRM: 'class_pipleline'
-              environmentAzureRmOverrideSubscriptionID: 'ff1980ab-1170-4014-971d-df65aabf1e5b'
-              environmentAzureRmUseIdTokenGeneration: true
-          # - task: SonarQubeAnalyze@8
-          #   inputs:
-          #     jdkversion: 'JAVA_HOME'
-          # - task: SonarQubePublish@8
-          #   inputs:
-          #     pollingTimeoutSec: '300'
-  # -  stage: 
-  #    dependsOn: []
-  #    condition: always()
-  #    jobs:
-       -  job:
-          displayName: Terraform 2nd job
-          pool:
-           name: Default
-           demands:
-             - Agent.Name -equals docker_agent
-          steps:
-          - task: TerraformInstaller@1
-            inputs:
-              terraformVersion: 'latest'
-          - task: TerraformTask@5
-            inputs:
-              provider: 'azurerm'
-              command: 'init'
-              workingDirectory: '$(System.DefaultWorkingDirectory)/Parent/'
-              backendServiceArm: 'class_pipleline'
-              backendAzureRmOverrideSubscriptionID: 'ff1980ab-1170-4014-971d-df65aabf1e5b'
-              backendAzureRmResourceGroupName: 'DoNotDeleteRg'
-              backendAzureRmStorageAccountName: 'donotdeletestorage5'
-              backendAzureRmContainerName: 'tfstate'
-              backendAzureRmKey: 'aks_terraform.tfstate'
+#           - task: TerraformTask@5
+#             inputs:
+#               provider: 'azurerm'
+#               command: 'validate'
+#           - task: TerraformTask@5
+#             inputs:
+#               provider: 'azurerm'
+#               command: 'plan'
+#               workingDirectory: '$(System.DefaultWorkingDirectory)/Parent/'
+#               environmentServiceNameAzureRM: 'class_pipleline'
+#               environmentAzureRmOverrideSubscriptionID: 'ff1980ab-1170-4014-971d-df65aabf1e5b'
+#               environmentAzureRmUseIdTokenGeneration: true   
 
-          - task: TerraformTask@5
-            inputs:
-              provider: 'azurerm'
-              command: 'validate'
-          - task: TerraformTask@5
-            inputs:
-              provider: 'azurerm'
-              command: 'plan'
-              workingDirectory: '$(System.DefaultWorkingDirectory)/Parent/'
-              environmentServiceNameAzureRM: 'class_pipleline'
-              environmentAzureRmOverrideSubscriptionID: 'ff1980ab-1170-4014-971d-df65aabf1e5b'
-              environmentAzureRmUseIdTokenGeneration: true   
-      

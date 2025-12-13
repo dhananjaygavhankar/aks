@@ -17,6 +17,7 @@ stages:
             name: Pradip_learning
           steps:
           - task: SonarQubePrepare@8
+            displayName: Sonarqube
             inputs:
               SonarQube: 'sonar'
               scannerMode: 'dotnet'

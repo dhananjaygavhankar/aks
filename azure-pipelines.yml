@@ -20,9 +20,11 @@ stages:
             displayName: Sonarqube
             inputs:
               SonarQube: 'sonar'
-              scannerMode: 'dotnet'
-              projectKey: 'aks-repo'
-              projectName: 'AKS Terraform'
+              scannerMode: 'cli'
+              configMode: 'manual'
+              cliProjectKey: 'aks'
+              cliProjectName: 'AKS Terraform'
+              cliSources: '.'
           - task: TerraformInstaller@1
             inputs:
               terraformVersion: 'latest'

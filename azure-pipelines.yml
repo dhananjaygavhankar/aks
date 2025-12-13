@@ -24,7 +24,7 @@ stages:
               configMode: 'manual'
               cliProjectKey: 'aks'
               cliProjectName: 'AKS Terraform'
-              cliSources: '.'
+              cliSources: '$(System.DefaultWorkingDirectory)/Parent/'
           - task: TerraformInstaller@1
             inputs:
               terraformVersion: 'latest'

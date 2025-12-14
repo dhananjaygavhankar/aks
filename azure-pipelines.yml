@@ -1,63 +1,63 @@
-# trigger:
-#  branches:
-#     include:
-#       - Main
-
-# jobs:
-#   - job: 
-#     displayName: Terraform install
-#     pool:
-#       name: Pradip_learning
-#     steps:
-#       - task: CmdLine@2
-#         displayName: SonarQube scanning
-#         inputs:
-#           script: 'sonar-scanner -Dsonar.projectKey=aks-repo -Dsonar.sources=. -Dsonar.host.url=http://localhost:9000 -Dsonar.token=sqp_ca05323fe18131c87f9d3206d316a351ed85bc11'
-
-#   -  job:
-#      displayName: Terraform 2nd job
-#      pool:
-#        name: Default
-#        demands:
-#          - Agent.Name -equals docker_agent
-#      steps:
-#      - task: TerraformInstaller@1
-#        inputs:
-#          terraformVersion: 'latest'
-
 trigger:
-  branches:
+ branches:
     include:
       - Main
 
 jobs:
-  # ✅ Job 1: SonarQube (Pradip_learning) - Runs IMMEDIATELY
-  - job: SonarQubeJob
-    displayName: 'SonarQube Scan'
+  - job: 
+    displayName: Terraform install
     pool:
       name: Pradip_learning
     steps:
       - task: CmdLine@2
-        displayName: 'SonarQube scanning'
+        displayName: SonarQube scanning
         inputs:
-          script: |
-            sonar-scanner ^
-              -Dsonar.projectKey=aks-repo ^
-              -Dsonar.sources=. ^
-              -Dsonar.host.url=http://localhost:9000 ^
-              -Dsonar.token=$(SONAR_TOKEN)  # Secure token
+          script: 'sonar-scanner -Dsonar.projectKey=aks -Dsonar.sources=. -Dsonar.host.url=https://sonarqube.devopsinsiders.com/projects -Dsonar.token=sqp_bb9374809a0df0b1386d88e35ee4031c4da4fd78'
 
-  # ✅ Job 2: Terraform (docker_agent) - Runs PARALLEL
-  - job: DockerTerraformJob
-    displayName: 'Terraform 2nd job'
-    pool:
-      name: Default
-      demands:
-        - Agent.Name -equals docker_agent
-    steps:
-      - task: TerraformInstaller@1
-        inputs:
-          terraformVersion: 'latest'
+  -  job:
+     displayName: Terraform 2nd job
+     pool:
+       name: Default
+       demands:
+         - Agent.Name -equals docker_agent
+     steps:
+     - task: TerraformInstaller@1
+       inputs:
+         terraformVersion: 'latest'
+
+# trigger:
+#   branches:
+#     include:
+#       - Main
+
+# jobs:
+#   # ✅ Job 1: SonarQube (Pradip_learning) - Runs IMMEDIATELY
+#   - job: SonarQubeJob
+#     displayName: 'SonarQube Scan'
+#     pool:
+#       name: Pradip_learning
+#     steps:
+#       - task: CmdLine@2
+#         displayName: 'SonarQube scanning'
+#         inputs:
+#           script: |
+#             sonar-scanner ^
+#               -Dsonar.projectKey=aks-repo ^
+#               -Dsonar.sources=. ^
+#               -Dsonar.host.url=http://localhost:9000 ^
+#               -Dsonar.token=$(SONAR_TOKEN)  # Secure token
+
+#   # ✅ Job 2: Terraform (docker_agent) - Runs PARALLEL
+#   - job: DockerTerraformJob
+#     displayName: 'Terraform 2nd job'
+#     pool:
+#       name: Default
+#       demands:
+#         - Agent.Name -equals docker_agent
+#     steps:
+#       - task: TerraformInstaller@1
+#         inputs:
+#           terraformVersion: 'latest'
 
 
 

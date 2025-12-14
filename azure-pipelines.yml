@@ -12,7 +12,7 @@ jobs:
       - task: CmdLine@2
         displayName: SonarQube scanning
         inputs:
-          script: 'sonar-scanner -Dsonar.projectKey=aks -Dsonar.sources=. -Dsonar.host.url=https://sonarqube.devopsinsiders.com/projects -Dsonar.token=sqp_bb9374809a0df0b1386d88e35ee4031c4da4fd78'
+          script: 'sonar-scanner -Dsonar.projectKey=aks -Dsonar.sources=. -Dsonar.host.url=https://sonarqube.devopsinsiders.com -Dsonar.token=sqp_bb9374809a0df0b1386d88e35ee4031c4da4fd78'
 
   -  job:
      displayName: Terraform 2nd job
